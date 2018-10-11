@@ -26,14 +26,15 @@ public class FlightController {
 		FlightModel flight = new FlightModel();
 		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(licenseNumber);
 		flight.setPilot(pilot);
-		
+		model.addAttribute("title", "Tambah Flight");
 		model.addAttribute("flight", flight);
 		return "addFlight";
 	}
 	
 	@RequestMapping(value="/flight/add", method=RequestMethod.POST)
-	private String addFlightSubmit(@ModelAttribute FlightModel flight) {
+	private String addFlightSubmit(@ModelAttribute FlightModel flight, Model model) {
 		flightService.addFlight(flight);
+		model.addAttribute("title", "Tambah");
 		return "add";
 	}
 		
@@ -49,6 +50,7 @@ public class FlightController {
 		for(FlightModel flight : pilot.getPilotFlight()) {
 			flightService.deleteFlightById(flight.getId());
 		}
+		model.addAttribute("title", "Hapus");
 		return "delete";
 	}
 	
@@ -57,12 +59,14 @@ public class FlightController {
 		FlightModel flight = flightService.getFlightDetailById(Long.parseLong(id));
 		model.addAttribute("flight", flight);
 		model.addAttribute("newFlight", new FlightModel());
+		model.addAttribute("title", "Update Flight");
 		return "update-flight";
 	}
 	
 	@RequestMapping(value="/flight/update", method = RequestMethod.POST)
-	private String updatePilotSubmit(@ModelAttribute FlightModel flight) {
+	private String updatePilotSubmit(@ModelAttribute FlightModel flight, Model model) {
 		flightService.updateFlight(flight);
+		model.addAttribute("title", "Update");
 		return "update";
 	}
 	
@@ -72,6 +76,7 @@ public class FlightController {
 		PilotModel pilot = pilotService.getPilotDetailByLicenseNumber(flight.getPilot().getLicenseNumber());
 		model.addAttribute("flight", flight);
 		model.addAttribute("pilot", pilot);
+		model.addAttribute("title", "View Flight");
 		return "view-flight";
 	}
 	
