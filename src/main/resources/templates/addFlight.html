@@ -19,7 +19,6 @@
 		<table>
 			<thead>
 				<tr>
-					<th style="text-align: center">No.</th>
 					<th style="text-align: center">Flight Number</th>
 					<th style="text-align: center">Origin</th>
 					<th style="text-align: center">Destination</th>
@@ -27,40 +26,20 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="flights,iterationStatus : *{pilotFlight}">
-					<td th:text="${iterationStatus.count}"></td>
-					<td><input type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].flightNumber}" /></td>
-					<td><input type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].origin}" /></td>
-					<td><input type="text" th:field="*{pilotFlight[__${iterationStatus.index}__].destination}" /></td>
-					<td><input type="date" th:field="*{pilotFlight[__${iterationStatus.index}__].time}" /></td>
+				<tr th:each="flights,rowStat : *{pilotFlight}">
+					<td><input type="text" th:field="*{pilotFlight[__${rowStat.index}__].flightNumber}" /></td>
+					<td><input type="text" th:field="*{pilotFlight[__${rowStat.index}__].origin}" /></td>
+					<td><input type="text" th:field="*{pilotFlight[__${rowStat.index}__].destination}" /></td>
+					<td><input type="date" th:field="*{pilotFlight[__${rowStat.index}__].time}" /></td>
 					<td><button type="submit" name="addRow">Add Flight</button></td>
 				</tr>
 			</tbody>
 		</table>
 		<br>
-		<button type="submit">Submit</button>
+		<button type="submit" name="submit">Submit</button>
 	</form>
 		
 	</div>
-
-	<!-- 
-	<form th:action="@{/flight/add}" th:object="${flight}" method="POST">
-		<input type="hidden" th:field="*{pilot}"/>
-		Flight Number: <br>
-		<input type="text" name="flightNumber" />
-		<br>
-		Origin: <br>
-		<input type="text" name="origin" />
-		<br>
-		Destination: <br>
-		<input type="text" name="destination" />
-		<br>
-		Time: <br>
-		<input type="date" name="time" />
-		<br><br>
-		<button type="submit">Submit</button>
-	</form>
-	-->
 	
 </body>
 </html>

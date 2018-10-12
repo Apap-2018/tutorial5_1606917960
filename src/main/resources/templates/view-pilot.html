@@ -9,6 +9,7 @@
 	<body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	
+	<div class="container-fluid">
 		<h3 th:text="'Pilot License Number : '+${pilot.licenseNumber}"></h3>
 		<h3 th:text="'Name : ' + ${pilot.name}"></h3>
 		<h3 th:text="'Fly Hour : ' + ${pilot.flyHour}"></h3>
@@ -17,9 +18,12 @@
 		<form th:action="@{'/pilot/update/' + ${pilot.licenseNumber}}">
 			<button type="submit">Update Pilot</button>
 		</form>
+		<br>
 		<form th:action="@{'/pilot/delete/' + ${pilot.licenseNumber}}">
 			<button type="submit">Delete Pilot</button> 
 		</form>
+		<br>
+		<h3 th:text="'Daftar Penerbangan'"></h3>
 		<form th:action="@{/flight/delete}" th:object="${pilot}" method="POST">
 			<table border="I">
 				<thead>
@@ -46,12 +50,16 @@
 					</tr>
 				</tbody>
 			</table>
+			<br>
 			<button type="submit">Delete Selected Flight</button>
 		</form>
 		<br>
 		<form th:action="@{/flight/add/} + ${pilot.licenseNumber}">
 			<button value="submit">Add Flight</button>
 		</form>
+	</div>
+	
+
 
 </body>
 </html>
